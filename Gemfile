@@ -75,3 +75,9 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+# add gem devise to create user profiles
+gem "devise"
+
+# Autoprefixer is a tool to add browser prefixes to CSS rules using the Can I Use database.
+gem "autoprefixer-rails"
