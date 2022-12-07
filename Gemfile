@@ -81,3 +81,6 @@ gem "devise"
 
 # Autoprefixer is a tool to add browser prefixes to CSS rules using the Can I Use database.
 gem "autoprefixer-rails"
+
+# Calendar
+gem "simple-form-datepicker"
