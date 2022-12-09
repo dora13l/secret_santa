@@ -1,7 +1,7 @@
 <%= simple_form_for(@event) do |f| %>
   <%= f.input :name, label: "Event" %>
   <%= f.input :location %>
-  <%= f.input :date, as: :datepicker %>
+  <%= f.input :date %>
   <%= f.input :price %>
   <%= f.button :submit, "Confirm" %>
 <% end %>
