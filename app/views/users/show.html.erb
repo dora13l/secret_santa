@@ -1,3 +1,13 @@
 <% if current_user.id == params[:id].to_i %>
   <%= render "shared/current_user_show" %>
 <% end %>
+
+
+<p> YOu are a part of: </p>
+<div>
+  <% @participants.each do |p|%>
+    <%= p.event.name%>
+  <% end%>
+
+
+</div>

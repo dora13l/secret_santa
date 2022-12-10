@@ -5,15 +5,16 @@ class ParticipantsController < ApplicationController
     @event = Event.find(params[:event_id])
     @participant = Participant.new(participant_params)
     @participant.event = @event
-    #@user = current_user
-
-    @participant.user = User.find(params[:first_name])
-    #@user = User.where(first_name: params[:first_name])
+    @participant.user = User.find_by(first_name: participant_params[:first_name])
     if @participant.save
       redirect_to event_path(@event)
     else
       render "events/show", status: :unprocessable_entity
     end
+  end
+
+  def show
+    @draw = Draw.new
   end
 
   def destroy
@@ -24,10 +25,7 @@ class ParticipantsController < ApplicationController
   end
 
   def update
-    @user = User.find(params[:first_name])
-    @participant.user = @user
     @participant.update!(participant_params)
-    render partial: "shared/participant", locals: {item: @participant}
   end
 
   private

@@ -18,16 +18,22 @@
     <% end %>
   </div>
 
-<div>
-  <%= simple_form_for([@event, @participant]) do |f| %>
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :email %>
-    <%= f.button :submit %>
-  <% end %>
-</div>
+  <div>
+    <%= simple_form_for([@event, @participant]) do |f| %>
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :email %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+  <br>
 
-<br>
+  <div>
+    <% if @event.draws.empty? %>
+      <%= button_to "create draws", event_make_path(@event), method: :get %>
+    <% end%>
+  </div>
+
 
 <%= link_to "Back to all events", events_path %>
 <%= button_to "Delete", event_path(@event), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>

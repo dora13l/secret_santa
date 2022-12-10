@@ -1,0 +1,9 @@
+<h2> <%= @draws.first.event.name %> </h2>
+
+<div>
+  <% @draws.each do |e|%>
+    <%= p " gifter: #{User.find(e[:gifter].to_i).first_name} receiver: #{User.find(e[:receiver].to_i).first_name} | "   %>
+  <% end%>
+</div>
+
+<%# {e.event.name} %>

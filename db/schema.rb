@@ -10,9 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_09_211313) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_112836) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "draws", force: :cascade do |t|
+    t.bigint "event_id", null: false
+    t.string "receiver"
+    t.string "gifter"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "participant_id"
+    t.bigint "user_id"
+    t.index ["event_id"], name: "index_draws_on_event_id"
+    t.index ["participant_id"], name: "index_draws_on_participant_id"
+    t.index ["user_id"], name: "index_draws_on_user_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -51,7 +64,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_09_211313) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "wishlists", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_wishlists_on_user_id"
+  end
+
+  add_foreign_key "draws", "events"
+  add_foreign_key "draws", "participants"
+  add_foreign_key "draws", "users"
   add_foreign_key "events", "users"
   add_foreign_key "participants", "events"
   add_foreign_key "participants", "users"
+  add_foreign_key "wishlists", "users"
 end

@@ -1,13 +1,11 @@
 class UsersController < ApplicationController
   def index
-    @participant = Participant.new
-    @event = Event.new
   end
 
   def show
     @user = User.find(params[:id])
     @my_events = my_events
-    @participant = Participant.new
+    @participants = @user.participants
   end
 
   def edit

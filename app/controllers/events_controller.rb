@@ -8,6 +8,7 @@ class EventsController < ApplicationController
 
   def show
     @participant = Participant.new
+    @draw = Draw.new
   end
 
   def new
