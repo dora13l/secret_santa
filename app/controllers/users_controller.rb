@@ -6,6 +6,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @my_events = my_events
     @participants = @user.participants
+    @my_wishlists = my_wishlists
   end
 
   def edit
@@ -26,5 +27,9 @@ class UsersController < ApplicationController
 
   def my_events
     @my_events = Event.where(user_id: current_user)
+  end
+
+  def my_wishlists
+    @my_wishlists = Wishlist.where(user_id: current_user)
   end
 end

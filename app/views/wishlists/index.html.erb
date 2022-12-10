@@ -1,0 +1,7 @@
+<div class="container">
+  <h1>All wishes</h1>
+<ul>
+  <% @wishlists.each do |wish| %>
+    <li><%= link_to wish.name, wishlist_path(wishlist) %></li>
+  <% end %>
+</ul>

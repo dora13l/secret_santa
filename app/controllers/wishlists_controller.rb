@@ -1,12 +1,14 @@
 class WishlistsController < ApplicationController
-  before_action :set_Wishlist, only: [:show, :destroy, :edit, :update]
+  before_action :set_wishlist, only: [:show, :destroy, :edit, :update]
   skip_before_action :authenticate_user!, only: [:index, :show]
 
   def index
-    @wish_lists = Wishlist.all
+    @wishlists = Wishlist.all
   end
 
   def show
+    @wishlist = Wishlist.find(params[:id])
+    @item = Item.new
   end
 
   def new
@@ -14,10 +16,10 @@ class WishlistsController < ApplicationController
   end
 
   def create
-    @wishlist = Wishlist.new(Wishlist_params)
+    @wishlist = Wishlist.new(wishlist_params)
     @wishlist.user = current_user
     if @wishlist.save
-      redirect_to Wishlist_path(@wishlist)
+      redirect_to wishlist_path(@wishlist)
       flash[:notice] = "Wishlist created!"
     else
       flash.now[:alert] = "Sorry, there was an issue!"
@@ -40,7 +42,7 @@ class WishlistsController < ApplicationController
   private
 
   def wishlist_params
-    params.require(:Wishlist).permit(
+    params.require(:wishlist).permit(
       :name
     )
   end

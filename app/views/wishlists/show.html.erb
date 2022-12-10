@@ -1,0 +1,21 @@
+<h1>Wishlists</h1>
+
+<h2><%= pluralize @wishlist.items.size, "item" %></h2>
+
+<div>
+  <% if @wishlist.items.blank? %>
+    Add items to <%= @wishlist.name %>
+  <% else %>
+    <% @wishlist.items.each do |item| %>
+      <p><%= item.product %></p>
+    <% end %>
+  <% end %>
+</div>
+
+
+<%= simple_form_for([@wishlist, @item]) do |f| %>
+  <%= f.input :product %>
+  <%= f.button :submit %>
+<% end %>
+
+<%= link_to "Back to all wishlists", wishlists_path %>

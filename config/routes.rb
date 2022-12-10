@@ -15,4 +15,8 @@ Rails.application.routes.draw do
     # get 'draw', to: 'draw#make', as: 'make'
     get '/make', to: 'draws#make', as: 'make'
   end
+
+  resources :wishlists do
+    resources :items, only: [:new, :create]
+  end
 end

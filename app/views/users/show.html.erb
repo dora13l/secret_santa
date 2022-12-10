@@ -2,12 +2,24 @@
   <%= render "shared/current_user_show" %>
 <% end %>
 
-
+<div>
 <p> YOu are a part of: </p>
 <div>
   <% @participants.each do |p|%>
     <%= p.event.name%>
   <% end%>
+</div>
 
-
+<h1> Your wish list </h1>
+<div class="user_grid row ">
+    <% if @my_wishlists.empty? %>
+      <p class="mt-3">You have not made a wishlist</p>
+    <% else %>
+      <div class = "grid__user_cards">
+        <% @my_wishlists.each do |wishlist| %>
+          <h2 class="py-2"><%= wishlist.name %></h2>
+          <%= link_to "View Wishlist and add more", wishlist_path(wishlist), {:style=>'font-size:12px' }%>
+        <% end %>
+      </div>
+    <% end %>
 </div>
