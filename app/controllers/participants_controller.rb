@@ -1,20 +1,18 @@
-class ParticipantssController < ApplicationController
+class ParticipantsController < ApplicationController
   before_action :set_participant, only: [:destroy, :update]
 
-  def new
-    @participant = Participant.new
-  end
-
   def create
-    @participant = Participants.new(participant_params)
-    @participant.user_id = @user.id
+    @event = Event.find(params[:event_id])
+    @participant = Participant.new(participant_params)
+    @participant.event = @event
+    #@user = current_user
+
+    @participant.user = User.find(params[:first_name])
+    #@user = User.where(first_name: params[:first_name])
     if @participant.save
-      respond_to do |format|
-        format.json { head :ok }
-      end
+      redirect_to event_path(@event)
     else
-      puts @participant.errors.full_messages
-      puts "something went wrong"
+      render "events/show", status: :unprocessable_entity
     end
   end
 
@@ -26,6 +24,8 @@ class ParticipantssController < ApplicationController
   end
 
   def update
+    @user = User.find(params[:first_name])
+    @participant.user = @user
     @participant.update!(participant_params)
     render partial: "shared/participant", locals: {item: @participant}
   end
@@ -33,12 +33,16 @@ class ParticipantssController < ApplicationController
   private
 
   def set_participant
-    @participant = Participants.find(params[:id])
+    @participant = Participant.find(params[:id])
   end
 
   def participant_params
     params.require(:participant).permit(
-      :user_id, :event_id
+      :first_name,
+      :last_name,
+      :email,
+      :event_id,
+      :user_id
     )
   end
 end

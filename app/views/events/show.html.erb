@@ -4,6 +4,31 @@
     <p><%=@event.date%></p>
     <p><%=@event.location%></p>
     <p><%=@event.price%></p>
-    </div>
+  </div>
+
+  <h2><%= pluralize @event.participants.size, "participant"%> </h2>
+
+  <div>
+    <% if @event.participants.blank? %>
+      Add the first participant to <%= @event.name %>
+    <% else %>
+      <% @event.participants.each do |participant| %>
+        <p><%= participant.first_name %>- <%= participant.last_name %>- <%= participant.email %></p>
+      <% end %>
+    <% end %>
+  </div>
+
+<div>
+  <%= simple_form_for([@event, @participant]) do |f| %>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.input :email %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
+
+<br>
+
+<%= link_to "Back to all events", events_path %>
 <%= button_to "Delete", event_path(@event), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
 </div>

@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
+  def index
+    @participant = Participant.new
+    @event = Event.new
+  end
+
   def show
-    @user = User.new
+    @user = User.find(params[:id])
     @my_events = my_events
+    @participant = Participant.new
   end
 
   def edit
@@ -23,5 +29,4 @@ class UsersController < ApplicationController
   def my_events
     @my_events = Event.where(user_id: current_user)
   end
-
 end
