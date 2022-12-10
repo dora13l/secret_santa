@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :events
   has_many :participants
+  has_one :wishlist
+  has_many :items, through: :wishlist
 
   validates :first_name, :last_name, :email, presence: true
   validates :email, uniqueness: true

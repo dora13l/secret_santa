@@ -1,15 +1,43 @@
+
 <% if current_user.id == params[:id].to_i %>
   <%= render "shared/current_user_show" %>
 <% end %>
 
-<div>
-<p> YOu are a part of: </p>
-<div>
-  <% @participants.each do |p|%>
-    <%= p.event.name%>
-  <% end%>
+<div class="user_grid row ">
+  <h2>Your Events</h2>
+    <% if @my_events.empty? %>
+      <p class="mt-3">You have no events</p>
+    <% else %>
+      <div class = "grid__user_cards">
+        <% @my_events.each do |event| %>
+          <h3><%= event.name %></h3>
+          <h3><%= event.date %></h3>
+          <%= link_to "View Event", event_path(event), {:style=>'font-size:12px' }%>
+        <% end %>
+      </div>
+    <% end %>
 </div>
 
+<div style="border: red; border-style: solid">
+  <p> YOu are a part of: </p>
+    <% @participants.each do |p|%>
+      <%= link_to p.event.name ,event_path(p.event.id)%>
+    <% end%>
+</div>
+
+<div>
+  <% @mypeople.each do |e| %>
+  <%= e[0] %>
+  <%=  e[1]%>
+  <%if e[2] != nil%>
+    <%= link_to e[2].name, wishlist_path(e[3])%>
+  <%end%>
+  <%end%>
+
+
+</div>
+
+<br>
 <h1> Your wish list </h1>
 <div class="user_grid row ">
     <% if @my_wishlists.empty? %>

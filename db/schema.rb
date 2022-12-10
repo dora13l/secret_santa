@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_10_155241) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_180016) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,6 +43,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_155241) do
     t.bigint "wishlist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_items_on_user_id"
     t.index ["wishlist_id"], name: "index_items_on_wishlist_id"
   end
 
@@ -84,6 +86,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_155241) do
   add_foreign_key "draws", "participants"
   add_foreign_key "draws", "users"
   add_foreign_key "events", "users"
+  add_foreign_key "items", "users"
   add_foreign_key "items", "wishlists"
   add_foreign_key "participants", "events"
   add_foreign_key "participants", "users"

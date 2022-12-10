@@ -1,4 +1,15 @@
-<h1>Secret Santa Generator</h1>
-<%= link_to "List an Event", new_event_path, class: "nav-link" %>
-
-<%= link_to "Create your wish lists", new_wishlist_path, class: "nav-link" %>
+<div class="container">
+  <div class="title">
+    <h1>Secret Santa Generator</h1>
+    <p> All participants must have a log in! </p>
+    <p> Then click below to start your Sercet Santa Event! </p>
+  </div>
+  <div class="section-2">
+    <div class="section-button">
+      <%= link_to "List an Event", new_event_path, class: "app-button" %>
+    <div>
+    <div class="section-button">
+      <%= link_to "Create your wish lists", new_wishlist_path, class: "app-button" %>
+    </div>
+  </div>
+</div>

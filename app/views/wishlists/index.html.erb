@@ -2,6 +2,10 @@
   <h1>All wishes</h1>
 <ul>
   <% @wishlists.each do |wish| %>
-    <li><%= link_to wish.name, wishlist_path(wishlist) %></li>
+    <%= link_to wishlist_path(wish), class:"text-decoration-none" do %>
+    <div>
+      <h2><%=wish.name%></h2>
+    </div>
+    <% end %>
   <% end %>
-</ul>
+</div>

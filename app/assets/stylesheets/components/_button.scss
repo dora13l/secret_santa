@@ -1,0 +1,31 @@
+.app-button {
+  border-style: solid;
+  border-color: $green;
+  background-color: $green;
+  color: $white;
+  height: 50px;
+  width: 70px;
+  border-radius: 16px;
+}
+
+.app-button {
+  border-style: solid;
+  border-color: $green;
+  background-color: $green;
+  color: $white;
+  border-radius: 8px;
+  text-decoration: none;
+  height: 50px;
+  width: 100px;
+}
+
+.app-button:hover {
+  border-style: solid;
+  border-color: $light-green;
+  background-color: $light-green;
+  color: $white;
+  height: 50px;
+  width: 100px;
+  border-radius: 8px;
+  text-decoration: none;
+}

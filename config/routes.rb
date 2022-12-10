@@ -11,8 +11,7 @@ Rails.application.routes.draw do
   end
   resources :events do
     resources :participants
-    # resources :draw, only: [:make]
-    # get 'draw', to: 'draw#make', as: 'make'
+    resources :draw
     get '/make', to: 'draws#make', as: 'make'
   end
 
