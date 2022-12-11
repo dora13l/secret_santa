@@ -4,22 +4,20 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    #events I created
+    # events I created
     @my_events = my_events
     # events i am in
     @participants = @user.participants
     @my_wishlists = my_wishlists
-    p "HELLLLOOOOOOOOOO"
     @mypeople = @participants.map do |e|
-      [User.find(e.event.draws.find_by(gifter: current_user.id.to_s).receiver.to_i).first_name,
-      e.event.name,
+      [e.event.name,
+      e.event.location,
+      e.event.price,
+      User.find(e.event.draws.find_by(gifter: current_user.id.to_s).receiver.to_i).first_name,
       Wishlist.find_by(user_id: User.find(e.event.draws.find_by(gifter: current_user.id.to_s).receiver.to_i).id),
-      Wishlist.find_by(user_id: User.find(e.event.draws.find_by(gifter: current_user.id.to_s).receiver.to_i).id)]
-
+      Wishlist.find_by(user_id: User.find(e.event.draws.find_by(gifter: current_user.id.to_s).receiver.to_i).id),
+    e.event.date]
     end
-
-    #binding.pry
-
   end
 
   def edit

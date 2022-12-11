@@ -1,1 +1,99 @@
-<h1>HELLO <%=current_user.first_name%>! </h1>
+
+<h1 class="section-title">Welcome <%=current_user.first_name%>!</h1>
+
+<div style="display: flex; gap: 24px; flex-direction: column;">
+  <h1>Your secret santa events!</h1>
+    <% if @mypeople.empty?%>
+      <p> You aren't apart of any events </p>
+    <% else %>
+      <div>
+
+        <div class="event-container">
+          <% @mypeople.each do |e| %>
+            <div class="card-event">
+              <div class="card-event-infos">
+                <div style="display: flex; gap: 4px;">
+                  <p style="font-weight: bold;">Event: </p>
+                  <p><%= e[0]%><p>
+                </div>
+
+                <div style="display: flex; gap: 4px;">
+                  <p style="font-weight: bold;">Location: <p>
+                  <p><%= e[1]%><p>
+                </div>
+
+                <div style="display: flex; gap: 4px;">
+                  <p style="font-weight: bold;">Date: <p>
+                  <p><%= e[6]%><p>
+                </div>
+
+                <div style="display: flex; gap: 4px;">
+                  <p style="font-weight: bold;">Budget: <p>
+                  <p><%= e[2]%><p>
+                </div>
+
+                <div style="display: flex; gap: 4px;">
+                  <p style="font-weight: bold;">You are Santa to: <p>
+                  <p><%= e[3]%><p>
+                </div>
+
+                <div style="display: flex; gap: 4px;">
+                  <p style="font-weight: bold;">View their wishlist here: </p>
+                  <% if e[4] != nil%>
+                    <%= link_to e[4].name, wishlist_path(e[5])%>
+                  <% else%>
+                    <p>They don't have a list 😥</p>
+                  <% end%>
+                </div>
+              </div>
+            </div>
+          <% end%>
+        </div>
+      </div>
+    <%end%>
+
+  <div style="display: flex; gap: 16px; flex-direction: column;">
+    <h1>Your wish list</h1>
+    <div>
+      <% if @my_wishlists.empty? %>
+        <p>You have not made a wishlist</p>
+      <% else %>
+        <div>
+          <% @my_wishlists.each do |wishlist| %>
+            <%= link_to wishlist.name , wishlist_path(wishlist), class:"app-button"%>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div>
+    <h1>Events you have created</h1>
+    <div class="event-container">
+        <%if @my_events.empty?%>
+          <p>You have no events</p>
+        <% else %>
+          <div style="display: flex;">
+            <% @my_events.each do |event| %>
+              <%= link_to event_path(event), class:"link-event" do %>
+                <div class="card-event">
+                  <div class="card-event-infos">
+                    <div style="display: flex; gap: 4px;">
+                      <p style="font-weight: bold;">Event: <p>
+                      <p><%= event.name %></p>
+                    </div>
+                    <div style="display: flex; gap: 4px;">
+                      <p style="font-weight: bold;">Date: <p>
+                      <p><%= event.date %></p>
+                    </div>
+
+                  </div>
+                </div>
+              <%end %>
+            <% end %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+
+</div>

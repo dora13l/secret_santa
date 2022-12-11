@@ -5,7 +5,7 @@ class ParticipantsController < ApplicationController
     @event = Event.find(params[:event_id])
     @participant = Participant.new(participant_params)
     @participant.event = @event
-    @participant.user = User.find_by(first_name: participant_params[:first_name])
+    @participant.user = User.find_by(email: participant_params[:email])
     if @participant.save
       redirect_to event_path(@event)
     else

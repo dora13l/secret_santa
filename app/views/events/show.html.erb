@@ -1,40 +1,56 @@
 <div class="container">
-  <div>
+  <div class="section-title-event">
     <h2><%=@event.name%></h2>
-    <p><%=@event.date%></p>
-    <p><%=@event.location%></p>
-    <p><%=@event.price%></p>
+    <div style="display: flex; gap: 4px;">
+      <p style="font-weight: bold;">Date: </p>
+      <p><%=@event.date%></p>
+    </div>
+    <div style="display: flex; gap: 4px;">
+      <p style="font-weight: bold;">Location: </p>
+      <p><%=@event.location%></p>
+    </div>
+    <div style="display: flex; gap: 4px;">
+      <p style="font-weight: bold;">Budget: </p>
+      <p><%=@event.price%></p>
+    </div>
   </div>
 
   <h2><%= pluralize @event.participants.size, "participant"%> </h2>
-
   <div>
     <% if @event.participants.blank? %>
       Add the first participant to <%= @event.name %>
     <% else %>
       <% @event.participants.each do |participant| %>
-        <p><%= participant.first_name %>- <%= participant.last_name %>- <%= participant.email %></p>
+        <ul>
+          <li><p><%= participant.first_name %> <%= participant.last_name %></p>
+        <%# <%= participant.email %>
+        </ul>
       <% end %>
     <% end %>
   </div>
 
   <div>
-    <%= simple_form_for([@event, @participant]) do |f| %>
-      <%= f.input :first_name %>
-      <%= f.input :last_name %>
-      <%= f.input :email %>
-      <%= f.button :submit %>
-    <% end %>
+    <% if @event.draws.empty? %>
+      <%= simple_form_for([@event, @participant]) do |f| %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :email %>
+        <div style='display:flex; justify-content:center;'>
+          <%= f.button :submit, class:"app-button" %>
+        </div>
+      <% end %>
+    <% end%>
   </div>
   <br>
 
   <div>
     <% if @event.draws.empty? %>
-      <%= button_to "create draws", event_make_path(@event), method: :get %>
+      <%= button_to "create draws", event_make_path(@event), method: :get, class:"app-button"  %>
     <% end%>
   </div>
 
-
-<%= link_to "Back to all events", events_path %>
-<%= button_to "Delete", event_path(@event), form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete %>
+  <div style='margin-top: 20px'>
+    <%= button_to "Back to profile", user_path(current_user) , method: :get, class:"app-button" %>
+  </div>
+  <%# <%= button_to "Delete", event_path(@event) ,form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete%>
 </div>

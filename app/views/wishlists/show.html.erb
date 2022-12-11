@@ -1,21 +1,31 @@
-<h1>Wishlists</h1>
+<div class="container">
+  <div class="section-title-event">
 
-<h2><%= pluralize @wishlist.items.size, "item" %></h2>
+    <h1> <%= @wishlist.user.first_name %>'s Wishlist</h1>
+  </div>
 
-<div>
-  <% if @wishlist.items.blank? %>
-    Add items to <%= @wishlist.name %>
-  <% else %>
-    <% @wishlist.items.each do |item| %>
-      <p><%= item.product %></p>
+  <%# <h2><%= pluralize @wishlist.items.size, "item"</h2> %>
+
+  <div>
+    <% if @wishlist.items.blank? %>
+      Add items to <%= @wishlist.name %>
+    <% else %>
+      <ul>
+        <% @wishlist.items.each do |item| %>
+          <li><%= item.product %></li>
+        <% end %>
+      </ul>
     <% end %>
-  <% end %>
+  </div>
+
+  <div>
+    <% if @wishlist.user == current_user%>
+      <%= simple_form_for([@wishlist, @item]) do |f| %>
+        <%= f.input :product %>
+        <%= f.button :submit %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <%= link_to "Back to your profile", user_path(current_user), class: "app-button" %>
 </div>
-
-
-<%= simple_form_for([@wishlist, @item]) do |f| %>
-  <%= f.input :product %>
-  <%= f.button :submit %>
-<% end %>
-
-<%= link_to "Back to all wishlists", wishlists_path %>

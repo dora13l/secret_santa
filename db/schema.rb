@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_12_10_180016) do
+ActiveRecord::Schema[7.0].define(version: 2022_12_10_155241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -20,11 +20,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_180016) do
     t.string "gifter"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "participant_id"
-    t.bigint "user_id"
     t.index ["event_id"], name: "index_draws_on_event_id"
-    t.index ["participant_id"], name: "index_draws_on_participant_id"
-    t.index ["user_id"], name: "index_draws_on_user_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -43,21 +39,19 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_180016) do
     t.bigint "wishlist_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id"
-    t.index ["user_id"], name: "index_items_on_user_id"
     t.index ["wishlist_id"], name: "index_items_on_wishlist_id"
   end
 
   create_table "participants", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "first_name"
     t.string "last_name"
     t.string "email"
-    t.bigint "event_id"
-    t.bigint "user_id"
-    t.index ["event_id"], name: "index_participants_on_event_id"
-    t.index ["user_id"], name: "index_participants_on_user_id"
+    t.index ["event_id"], name: "index_pairs_on_event_id"
+    t.index ["user_id"], name: "index_pairs_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,12 +77,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_10_180016) do
   end
 
   add_foreign_key "draws", "events"
-  add_foreign_key "draws", "participants"
-  add_foreign_key "draws", "users"
   add_foreign_key "events", "users"
-  add_foreign_key "items", "users"
   add_foreign_key "items", "wishlists"
-  add_foreign_key "participants", "events"
-  add_foreign_key "participants", "users"
   add_foreign_key "wishlists", "users"
 end
