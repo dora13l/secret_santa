@@ -57,6 +57,7 @@
     <div>
       <% if @my_wishlists.empty? %>
         <p>You have not made a wishlist</p>
+        <%= link_to "Create your wish list", new_wishlist_path, class: "app-button" %>
       <% else %>
         <div>
           <% @my_wishlists.each do |wishlist| %>
