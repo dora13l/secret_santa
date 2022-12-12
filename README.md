@@ -21,12 +21,11 @@ This app allows users to create secret santa events, add participants and find o
 
 ## Features
 
-- Create/edit plant listings
-- Find plant cuttings for sale in your area using Mapbox API
-- Purchase multiple plant cuttings from various sellers
-- Checkout and pay with credit card via Stripe API
-- Review your purchases
-- View all your plants bought, sold and listed on your dashboard
+- Create events
+- Add participants to the event
+- Create a draw that ensures everyone has a person to gift
+- Create your wishlist and add items to it
+- Display what events you are a part of, your wishlists and the events you have created on own users profile page
 
 ## Setup
 
