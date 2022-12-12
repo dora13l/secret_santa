@@ -54,11 +54,11 @@ Run:
 to start a local rails server
 
 ## Room for Improvement
-# Should have created testing before creating app - but still undergoing learning process
+Should have created testing before creating app - but still undergoing learning process
 
-# Add more testing
-# Explore bugs (e.g. gifter.user_id kept throwing errors randomly)
-# More front end/ JavaScript - was more focused on making the backend work
-# Tidy scss files into smaller fragments
+-Add more testing
+-Explore bugs (e.g. gifter.user_id kept throwing errors randomly)
+-More front end/ JavaScript - was more focused on making the backend work
+-Tidy scss files into smaller fragments
 
 
