@@ -1,31 +1,27 @@
 <div class="container">
   <div class="section-title-event">
-
     <h1> <%= @wishlist.user.first_name %>'s Wishlist</h1>
   </div>
-
   <%# <h2><%= pluralize @wishlist.items.size, "item"</h2> %>
 
-  <div>
-    <% if @wishlist.items.blank? %>
-      Add items to <%= @wishlist.name %>
-    <% else %>
-      <ul>
-        <% @wishlist.items.each do |item| %>
-          <li><%= item.product %></li>
-        <% end %>
-      </ul>
+  <div data-controller='insert-in-list'>
+    <div data-insert-in-list-target="items">
+      <% if @wishlist.items.blank? %>
+        Add items to <%= @wishlist.name %>
+      <% else %>
+        <ul>
+          <% @wishlist.items.each do |item| %>
+            <%= render 'wishlists/item', item: item %>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+
+    <% if @wishlist.user == current_user%>
+      <%= render "items/form", item: @item, wishlist: @wishlist %>
     <% end %>
   </div>
 
-  <div>
-    <% if @wishlist.user == current_user%>
-      <%= simple_form_for([@wishlist, @item]) do |f| %>
-        <%= f.input :product %>
-        <%= f.button :submit %>
-      <% end %>
-    <% end %>
-  </div>
 
   <%= link_to "Back to your profile", user_path(current_user), class: "app-button" %>
 </div>
