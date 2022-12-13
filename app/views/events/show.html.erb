@@ -43,14 +43,20 @@
   </div>
   <br>
 
-  <div>
-    <% if @event.draws.empty? %>
-      <%= button_to "create draws", event_make_path(@event), method: :get, class:"app-button"  %>
-    <% end%>
+  <div style='text-align: center;'>
+    <div>
+      <% if @event.draws.empty? %>
+        <%= button_to "create draws", event_make_path(@event), method: :get, class:"app-button"  %>
+      <% end%>
+    </div>
+    <div style='margin-top: 20px'>
+      <%= button_to "Edit event", edit_event_path(@event) , method: :get, class:"app-button" %>
+    </div>
+    <div style='margin-top: 20px'>
+      <%= button_to "Back to profile", user_path(current_user) , method: :get, class:"app-button" %>
+    </div>
+    <div style='margin-top: 20px'>
+      <%= button_to "Delete", event_path(@event) ,form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete, class:"app-button"%>
+    </div>
   </div>
-
-  <div style='margin-top: 20px'>
-    <%= button_to "Back to profile", user_path(current_user) , method: :get, class:"app-button" %>
-  </div>
-  <%# <%= button_to "Delete", event_path(@event) ,form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete%>
 </div>

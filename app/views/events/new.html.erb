@@ -2,13 +2,6 @@
   <div class="section-title">
     <h1>Create your event here</h1>
   </div>
-  <%= simple_form_for(@event) do |f| %>
-    <%= f.input :name, label: "Event name" %>
-    <%= f.input :location %>
-    <%= f.input :date %>
-    <%= f.input :price, label:"Budget"%>
-    <div style='display:flex; justify-content:center;'>
-      <%= f.button :submit, class:"app-button" %>
-    </div>
-  <% end %>
+    <%= render "events/form", event: @event %>
+  </div>
 </div>

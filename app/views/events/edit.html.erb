@@ -1,0 +1,5 @@
+  <div class="container">
+    <h2>Submit changes to event</h2>
+    <%= render "events/form", event: @event %>
+    <%= button_to "Back to profile", user_path(current_user) , method: :get, class:"app-button" %>
+  </div>

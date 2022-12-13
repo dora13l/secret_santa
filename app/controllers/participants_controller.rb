@@ -13,10 +13,6 @@ class ParticipantsController < ApplicationController
     end
   end
 
-  def show
-    @draw = Draw.new
-  end
-
   def destroy
     @participant.destroy
     respond_to do |format|

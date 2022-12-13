@@ -3,12 +3,18 @@ class UsersController < ApplicationController
   end
 
   def show
+    # get the user
     @user = User.find(params[:id])
     # events I created
     @my_events = my_events
+    # my wish list
+    @my_wishlists = my_wishlists
     # events i am in
     @participants = @user.participants
-    @my_wishlists = my_wishlists
+    # binding.pry
+    # events has many participants
+    # event has many draws
+    # gifter is the current user and they want to grab whoever is their receiver in each event
     @mypeople = @participants.map do |e|
       [e.event.name,
       e.event.location,

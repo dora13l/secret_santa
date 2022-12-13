@@ -1,10 +1,12 @@
-<h2><%= @draws.first.event.name %> Done!</h2>
-<%= link_to "Back to profile", user_path(current_user), class: "app-button"%>
+<div class='container section-title'>
+  <h2><%= @draws.first.event.name %> Done!</h2>
+  <%= link_to "Back to profile", user_path(current_user), class: "app-button"%>
 
-<div>
-  <% @draws.each do |e|%>
-    <p style="color: white;"><% " gifter: #{User.find(e[:gifter].to_i).first_name} receiver: #{User.find(e[:receiver].to_i).first_name} | " %></p>
-  <% end%>
+  <div>
+    <% @draws.each do |e|%>
+      <p style="color: white;"><% " gifter: #{User.find(e[:gifter].to_i).first_name} receiver: #{User.find(e[:receiver].to_i).first_name} | " %></p>
+    <% end%>
+  </div>
 </div>
 
 <%# {e.event.name} %>

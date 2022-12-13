@@ -7,8 +7,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    # want to show the participants on the event show page
     @participant = Participant.new
-    @draw = Draw.new
   end
 
   def new
@@ -28,16 +28,18 @@ class EventsController < ApplicationController
   end
 
   def edit
+    # get the form
   end
 
   def update
+    # patch the form
     @event.update(event_params)
     redirect_to event_path(@event)
   end
 
   def destroy
     @event.destroy
-    redirect_to events_path, status: :see_other
+    redirect_to user_path(current_user), status: :see_other
   end
 
   private
